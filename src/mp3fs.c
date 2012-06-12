@@ -284,7 +284,7 @@ static int mp3fs_open(const char *path, struct fuse_file_info *fi) {
     }
 
     /* Store transcoder in the fuse_file_info structure. */
-    fi->fh = (uint64_t)trans;
+    fi->fh = (uint64_t)(ptrdiff_t)trans;
 
 transcoder_fail:
 passthrough:
@@ -323,7 +323,7 @@ static int mp3fs_read(const char *path, char *buf, size_t size, off_t offset,
         goto open_fail;
     }
 
-    trans = (struct transcoder*)fi->fh;
+    trans = (struct transcoder*)(ptrdiff_t)fi->fh;
 
     if (!trans) {
         mp3fs_error("Tried to read from unopen file: %s", origpath);
@@ -368,7 +368,7 @@ static int mp3fs_release(const char *path, struct fuse_file_info *fi) {
 
     mp3fs_debug("release %s", path);
 
-    trans = (struct transcoder*)fi->fh;
+    trans = (struct transcoder*)(ptrdiff_t)fi->fh;
     if (trans) {
         transcoder_finish(trans);
         transcoder_delete(trans);
