@@ -52,7 +52,7 @@ struct mp3_buffer {
 /* Transcoder parameters for open mp3 */
 struct transcoder {
     struct mp3_buffer buffer;
-    unsigned long totalsize;
+    uint64_t totalsize;
 
     struct id3_tag *id3tag;
     char id3v1tag[128];
