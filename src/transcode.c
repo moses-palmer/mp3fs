@@ -504,7 +504,7 @@ trans_fail:
 int transcoder_read(struct transcoder* trans, char* buff, off_t offset,
         size_t len) {
     if (offset+len > trans->totalsize) {
-        len = trans->totalsize - offset;
+        len = offset < trans->totalsize ? trans->totalsize - offset : 0;
     }
 
     /*
