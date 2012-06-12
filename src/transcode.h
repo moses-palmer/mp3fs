@@ -66,7 +66,7 @@ struct transcoder {
 };
 
 struct transcoder* transcoder_new(char *flacname);
-int transcoder_read(struct transcoder* trans, char* buff, int offset,
-                    int len);
+int transcoder_read(struct transcoder* trans, char* buff, off_t offset,
+                    size_t len);
 int transcoder_finish(struct transcoder* trans);
 void transcoder_delete(struct transcoder* trans);

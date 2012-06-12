@@ -501,7 +501,8 @@ trans_fail:
 
 /* Read some bytes into the internal buffer and into the given buffer. */
 
-int transcoder_read(struct transcoder* trans, char* buff, int offset, int len) {
+int transcoder_read(struct transcoder* trans, char* buff, off_t offset,
+        size_t len) {
     if (offset+len > trans->totalsize) {
         len = trans->totalsize - offset;
     }
